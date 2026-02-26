@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_8792608b84ce9c856be0152bd47fdfce {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="
+position: fixed; 
+bottom: 40px; left: 40px; width: 240px; 
+background-color: white; 
+border:2px solid grey; 
+z-index:9999; 
+font-size:14px;
+padding: 10px;
+">
+<b>Sector Clusters (DBSCAN, 50 miles)</b><br><br>
+<span style="color:#1f4e79;">●</span> Aerospace<br>
+<span style="color:#7a0177;">●</span> Biotech<br>
+<span style="color:#00441b;">●</span> Software<br>
+<span style="color:#8c510a;">●</span> Agriculture<br><br>
+Circle size ∝ Cluster size
+</div>
+    
+            <div class="folium-map" id="map_8792608b84ce9c856be0152bd47fdfce" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_8792608b84ce9c856be0152bd47fdfce = L.map(
+                "map_8792608b84ce9c856be0152bd47fdfce",
+                {
+                    center: [56.0, -96.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d00511ae51de620108147db5ea8f9d39 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d00511ae51de620108147db5ea8f9d39.addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+            var circle_marker_c8064be3ae63ad8b262556d6b7e4622f = L.circleMarker(
+                [43.67529775491802, -79.71160459344264],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 39.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_f6ca4e1d3d86689a946d8f28aec5da5f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5dc34025838bf1f8eb23115e7d526562 = $(`<div id="html_5dc34025838bf1f8eb23115e7d526562" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 132</div>`)[0];
+                popup_f6ca4e1d3d86689a946d8f28aec5da5f.setContent(html_5dc34025838bf1f8eb23115e7d526562);
+            
+        
+
+        circle_marker_c8064be3ae63ad8b262556d6b7e4622f.bindPopup(popup_f6ca4e1d3d86689a946d8f28aec5da5f)
+        ;
+
+        
+    
+    
+            var circle_marker_8d4434a21ab9eda58eb915a1163043b1 = L.circleMarker(
+                [49.098741686046516, -123.0249196372093],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_99ba57cc1066e5c6dba608dbcd5bcccc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a50982230f7849b7c903973739739246 = $(`<div id="html_a50982230f7849b7c903973739739246" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 45</div>`)[0];
+                popup_99ba57cc1066e5c6dba608dbcd5bcccc.setContent(html_a50982230f7849b7c903973739739246);
+            
+        
+
+        circle_marker_8d4434a21ab9eda58eb915a1163043b1.bindPopup(popup_99ba57cc1066e5c6dba608dbcd5bcccc)
+        ;
+
+        
+    
+    
+            var circle_marker_c64e7ed27f4a9b0695bc2a06d72b19f4 = L.circleMarker(
+                [45.50461974353741, -74.20914551972791],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 45.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_37bee9232e0cacd11053c960d48015a2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b5794010fda96eff3b0c9b6ab592e97 = $(`<div id="html_0b5794010fda96eff3b0c9b6ab592e97" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 158</div>`)[0];
+                popup_37bee9232e0cacd11053c960d48015a2.setContent(html_0b5794010fda96eff3b0c9b6ab592e97);
+            
+        
+
+        circle_marker_c64e7ed27f4a9b0695bc2a06d72b19f4.bindPopup(popup_37bee9232e0cacd11053c960d48015a2)
+        ;
+
+        
+    
+    
+            var circle_marker_ac174881070d4af7b746c562cbe4f765 = L.circleMarker(
+                [53.51771767142857, -113.51517495714283],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_39ae351041f8e650d5b097a6b28d4db6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0d8dade542be55ac7aa27c23253ad3c3 = $(`<div id="html_0d8dade542be55ac7aa27c23253ad3c3" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 7</div>`)[0];
+                popup_39ae351041f8e650d5b097a6b28d4db6.setContent(html_0d8dade542be55ac7aa27c23253ad3c3);
+            
+        
+
+        circle_marker_ac174881070d4af7b746c562cbe4f765.bindPopup(popup_39ae351041f8e650d5b097a6b28d4db6)
+        ;
+
+        
+    
+    
+            var circle_marker_10454f193f6aa0e7e8c33b97d0715d1d = L.circleMarker(
+                [44.724333249999994, -63.59629138571429],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_d32f484a7d25e4ca2320d77d394beceb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_131451a77e046dd6cc0a632f68b0278a = $(`<div id="html_131451a77e046dd6cc0a632f68b0278a" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 14</div>`)[0];
+                popup_d32f484a7d25e4ca2320d77d394beceb.setContent(html_131451a77e046dd6cc0a632f68b0278a);
+            
+        
+
+        circle_marker_10454f193f6aa0e7e8c33b97d0715d1d.bindPopup(popup_d32f484a7d25e4ca2320d77d394beceb)
+        ;
+
+        
+    
+    
+            var circle_marker_10a83c66550d03f7d27745850a617dbc = L.circleMarker(
+                [42.919451699999996, -78.95457000000002],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_67007f24bdad4c785c54a017dd1049fc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c29be868b92e054f992312a946466758 = $(`<div id="html_c29be868b92e054f992312a946466758" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 3</div>`)[0];
+                popup_67007f24bdad4c785c54a017dd1049fc.setContent(html_c29be868b92e054f992312a946466758);
+            
+        
+
+        circle_marker_10a83c66550d03f7d27745850a617dbc.bindPopup(popup_67007f24bdad4c785c54a017dd1049fc)
+        ;
+
+        
+    
+    
+            var circle_marker_e2b0f7e92d8603731e656778a970bbd7 = L.circleMarker(
+                [49.8923789, -97.22251538750001],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_d293cc3fcb715119dd107ff647384980 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3d4d472f7e397b26844d6c7a7008dc6c = $(`<div id="html_3d4d472f7e397b26844d6c7a7008dc6c" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 9</div>`)[0];
+                popup_d293cc3fcb715119dd107ff647384980.setContent(html_3d4d472f7e397b26844d6c7a7008dc6c);
+            
+        
+
+        circle_marker_e2b0f7e92d8603731e656778a970bbd7.bindPopup(popup_d293cc3fcb715119dd107ff647384980)
+        ;
+
+        
+    
+    
+            var circle_marker_faccc982389a0b2e9b37c6d150cd9960 = L.circleMarker(
+                [49.917737011111114, -119.44608978888888],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_eacdb820ebdd04a2baf159f8aa2ab6d3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_005472d256afcc4025847fba18f29fa4 = $(`<div id="html_005472d256afcc4025847fba18f29fa4" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 9</div>`)[0];
+                popup_eacdb820ebdd04a2baf159f8aa2ab6d3.setContent(html_005472d256afcc4025847fba18f29fa4);
+            
+        
+
+        circle_marker_faccc982389a0b2e9b37c6d150cd9960.bindPopup(popup_eacdb820ebdd04a2baf159f8aa2ab6d3)
+        ;
+
+        
+    
+    
+            var circle_marker_1f3021b5b3dd06f89a76aadb4b47657a = L.circleMarker(
+                [46.233288900000005, -64.09452718000001],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_7be2b9141a037ae6ab521d92eceda308 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9b554700caf5ea5047fd941a8c767918 = $(`<div id="html_9b554700caf5ea5047fd941a8c767918" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 5</div>`)[0];
+                popup_7be2b9141a037ae6ab521d92eceda308.setContent(html_9b554700caf5ea5047fd941a8c767918);
+            
+        
+
+        circle_marker_1f3021b5b3dd06f89a76aadb4b47657a.bindPopup(popup_7be2b9141a037ae6ab521d92eceda308)
+        ;
+
+        
+    
+    
+            var circle_marker_3362d1f48639c8ea7d7eb8addf38df85 = L.circleMarker(
+                [51.08589192, -114.01770521333334],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_e7d31d147c363f00c85f8dbc09d32120 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ccd036adbdf0276bbabeeb03bd66893 = $(`<div id="html_1ccd036adbdf0276bbabeeb03bd66893" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 16</div>`)[0];
+                popup_e7d31d147c363f00c85f8dbc09d32120.setContent(html_1ccd036adbdf0276bbabeeb03bd66893);
+            
+        
+
+        circle_marker_3362d1f48639c8ea7d7eb8addf38df85.bindPopup(popup_e7d31d147c363f00c85f8dbc09d32120)
+        ;
+
+        
+    
+    
+            var circle_marker_56d2f044a9885afa64679c5444022396 = L.circleMarker(
+                [47.58302330000001, -52.74275386666667],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_592a32259cce1e0f627818325fa3ed94 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c41f9ac907c00e0c0e75fb9ed23c2548 = $(`<div id="html_c41f9ac907c00e0c0e75fb9ed23c2548" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 4</div>`)[0];
+                popup_592a32259cce1e0f627818325fa3ed94.setContent(html_c41f9ac907c00e0c0e75fb9ed23c2548);
+            
+        
+
+        circle_marker_56d2f044a9885afa64679c5444022396.bindPopup(popup_592a32259cce1e0f627818325fa3ed94)
+        ;
+
+        
+    
+    
+            var circle_marker_6c294d4f51f9ec7c3fdb1e66f539c967 = L.circleMarker(
+                [52.1408996, -106.64353562],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_ec89ee7325711e8976f3a568759a019e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_492ccc088bede5f3c6807a36830a51e6 = $(`<div id="html_492ccc088bede5f3c6807a36830a51e6" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 5</div>`)[0];
+                popup_ec89ee7325711e8976f3a568759a019e.setContent(html_492ccc088bede5f3c6807a36830a51e6);
+            
+        
+
+        circle_marker_6c294d4f51f9ec7c3fdb1e66f539c967.bindPopup(popup_ec89ee7325711e8976f3a568759a019e)
+        ;
+
+        
+    
+    
+            var circle_marker_e1cbb5b128ca9bc31162cfefa7e07919 = L.circleMarker(
+                [46.75299313333334, -71.35014403333334],
+                {"bubblingMouseEvents": true, "color": "#1f4e79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f4e79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_508cf6cdf93f415ae29a98794096380b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf8c363e98c4ec8aa56799911aa043bb = $(`<div id="html_cf8c363e98c4ec8aa56799911aa043bb" style="width: 100.0%; height: 100.0%;">Aerospace Cluster<br>Firms: 3</div>`)[0];
+                popup_508cf6cdf93f415ae29a98794096380b.setContent(html_cf8c363e98c4ec8aa56799911aa043bb);
+            
+        
+
+        circle_marker_e1cbb5b128ca9bc31162cfefa7e07919.bindPopup(popup_508cf6cdf93f415ae29a98794096380b)
+        ;
+
+        
+    
+    
+            var circle_marker_29124d3b1215135fe82c313f16ff1e9c = L.circleMarker(
+                [49.183167457352944, -123.10084585588233],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_e269d5676e876af54f40ef2d2604974a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_335bf5aa869ba4207ca38ffed817b4dd = $(`<div id="html_335bf5aa869ba4207ca38ffed817b4dd" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 79</div>`)[0];
+                popup_e269d5676e876af54f40ef2d2604974a.setContent(html_335bf5aa869ba4207ca38ffed817b4dd);
+            
+        
+
+        circle_marker_29124d3b1215135fe82c313f16ff1e9c.bindPopup(popup_e269d5676e876af54f40ef2d2604974a)
+        ;
+
+        
+    
+    
+            var circle_marker_8422585c80c49cda1fc1e176f9f9a08d = L.circleMarker(
+                [43.56099847619047, -79.72803995714287],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 41.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_521b7392bb7397c8b0055052bd86c1d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1f2787798278927118b0b9b96f3af5dd = $(`<div id="html_1f2787798278927118b0b9b96f3af5dd" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 141</div>`)[0];
+                popup_521b7392bb7397c8b0055052bd86c1d5.setContent(html_1f2787798278927118b0b9b96f3af5dd);
+            
+        
+
+        circle_marker_8422585c80c49cda1fc1e176f9f9a08d.bindPopup(popup_521b7392bb7397c8b0055052bd86c1d5)
+        ;
+
+        
+    
+    
+            var circle_marker_c6680230a89bccba0f3d04665380c56a = L.circleMarker(
+                [46.78473116000001, -71.26888905],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_59fbd6b81a45faf8c8d1fb1c780ef17a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_448a9b5bef37d42676d6306a3b3a7f75 = $(`<div id="html_448a9b5bef37d42676d6306a3b3a7f75" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 13</div>`)[0];
+                popup_59fbd6b81a45faf8c8d1fb1c780ef17a.setContent(html_448a9b5bef37d42676d6306a3b3a7f75);
+            
+        
+
+        circle_marker_c6680230a89bccba0f3d04665380c56a.bindPopup(popup_59fbd6b81a45faf8c8d1fb1c780ef17a)
+        ;
+
+        
+    
+    
+            var circle_marker_bb192eb4533041369e1822252d505077 = L.circleMarker(
+                [45.38132494, -75.76890485999999],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_ac062843264a8365740c529bbcdea009 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d850b58d5866e33b31bce54e9d5ba852 = $(`<div id="html_d850b58d5866e33b31bce54e9d5ba852" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 14</div>`)[0];
+                popup_ac062843264a8365740c529bbcdea009.setContent(html_d850b58d5866e33b31bce54e9d5ba852);
+            
+        
+
+        circle_marker_bb192eb4533041369e1822252d505077.bindPopup(popup_ac062843264a8365740c529bbcdea009)
+        ;
+
+        
+    
+    
+            var circle_marker_123d04bd65c8d7848be95e7747b85f39 = L.circleMarker(
+                [45.51259492592591, -73.66233754567901],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 29.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_58252042f96e0826c434b9f7535ef480 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a97862dfcdf6f27ee1814245e1fd50e6 = $(`<div id="html_a97862dfcdf6f27ee1814245e1fd50e6" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 94</div>`)[0];
+                popup_58252042f96e0826c434b9f7535ef480.setContent(html_a97862dfcdf6f27ee1814245e1fd50e6);
+            
+        
+
+        circle_marker_123d04bd65c8d7848be95e7747b85f39.bindPopup(popup_58252042f96e0826c434b9f7535ef480)
+        ;
+
+        
+    
+    
+            var circle_marker_dc68fef73ba1197c2d8744e8f2b99b0b = L.circleMarker(
+                [52.147327200000014, -106.6480991375],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_dcf89b2826e87005eff1f0d1580f7751 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c835afdb2320c1e6faf8ce91d0455b57 = $(`<div id="html_c835afdb2320c1e6faf8ce91d0455b57" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 9</div>`)[0];
+                popup_dcf89b2826e87005eff1f0d1580f7751.setContent(html_c835afdb2320c1e6faf8ce91d0455b57);
+            
+        
+
+        circle_marker_dc68fef73ba1197c2d8744e8f2b99b0b.bindPopup(popup_dcf89b2826e87005eff1f0d1580f7751)
+        ;
+
+        
+    
+    
+            var circle_marker_821d37ffe454dfffdd43aaee9c375da2 = L.circleMarker(
+                [49.79684225000001, -119.5137033],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_ea6be1147dc32c4affdfdf6aab854f0b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_db406eb0bd54f4bd207708cb3d18f1b7 = $(`<div id="html_db406eb0bd54f4bd207708cb3d18f1b7" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 4</div>`)[0];
+                popup_ea6be1147dc32c4affdfdf6aab854f0b.setContent(html_db406eb0bd54f4bd207708cb3d18f1b7);
+            
+        
+
+        circle_marker_821d37ffe454dfffdd43aaee9c375da2.bindPopup(popup_ea6be1147dc32c4affdfdf6aab854f0b)
+        ;
+
+        
+    
+    
+            var circle_marker_b5572e9f1cab18354785bc8e05e86d4f = L.circleMarker(
+                [49.87635300000001, -97.13955999],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_407a415b083ff4a38fcd1e65d1ef55a9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dc80c9702014fa971ef5f70b2bfaa5b2 = $(`<div id="html_dc80c9702014fa971ef5f70b2bfaa5b2" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 11</div>`)[0];
+                popup_407a415b083ff4a38fcd1e65d1ef55a9.setContent(html_dc80c9702014fa971ef5f70b2bfaa5b2);
+            
+        
+
+        circle_marker_b5572e9f1cab18354785bc8e05e86d4f.bindPopup(popup_407a415b083ff4a38fcd1e65d1ef55a9)
+        ;
+
+        
+    
+    
+            var circle_marker_aa7a2c871d989a05c1c159e129578e69 = L.circleMarker(
+                [47.560679500000006, -52.7401041],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_d8d5814eddf02890e2a84f482318abbe = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6ac87f1d741044721026ba2bde32073 = $(`<div id="html_f6ac87f1d741044721026ba2bde32073" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 2</div>`)[0];
+                popup_d8d5814eddf02890e2a84f482318abbe.setContent(html_f6ac87f1d741044721026ba2bde32073);
+            
+        
+
+        circle_marker_aa7a2c871d989a05c1c159e129578e69.bindPopup(popup_d8d5814eddf02890e2a84f482318abbe)
+        ;
+
+        
+    
+    
+            var circle_marker_14c5acf20f234e79246731c8633142b5 = L.circleMarker(
+                [51.03747991111113, -114.0555420888889],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_a0808da30adf49d4dbd2c96bd52ab75a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_50f80b44236e4ef754b25a8f6ee6d68c = $(`<div id="html_50f80b44236e4ef754b25a8f6ee6d68c" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 9</div>`)[0];
+                popup_a0808da30adf49d4dbd2c96bd52ab75a.setContent(html_50f80b44236e4ef754b25a8f6ee6d68c);
+            
+        
+
+        circle_marker_14c5acf20f234e79246731c8633142b5.bindPopup(popup_a0808da30adf49d4dbd2c96bd52ab75a)
+        ;
+
+        
+    
+    
+            var circle_marker_663b01880364c5ad5a0f225d62aeeb69 = L.circleMarker(
+                [53.50782529166667, -113.50800269166666],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_19803ec06142862fe4e7d4338ad1a7e5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e377ff46316ee9505bdbc7b5652f3d4 = $(`<div id="html_2e377ff46316ee9505bdbc7b5652f3d4" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 12</div>`)[0];
+                popup_19803ec06142862fe4e7d4338ad1a7e5.setContent(html_2e377ff46316ee9505bdbc7b5652f3d4);
+            
+        
+
+        circle_marker_663b01880364c5ad5a0f225d62aeeb69.bindPopup(popup_19803ec06142862fe4e7d4338ad1a7e5)
+        ;
+
+        
+    
+    
+            var circle_marker_4a445bcb741bdee11061a82f487ea1f1 = L.circleMarker(
+                [46.29024763333334, -62.83488876666666],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_b5cebd5cc047d19ac158907e010fc7bd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4e1c2942fa8e38d6d457a1e7df3721f4 = $(`<div id="html_4e1c2942fa8e38d6d457a1e7df3721f4" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 3</div>`)[0];
+                popup_b5cebd5cc047d19ac158907e010fc7bd.setContent(html_4e1c2942fa8e38d6d457a1e7df3721f4);
+            
+        
+
+        circle_marker_4a445bcb741bdee11061a82f487ea1f1.bindPopup(popup_b5cebd5cc047d19ac158907e010fc7bd)
+        ;
+
+        
+    
+    
+            var circle_marker_7a251d73323ec708b9152b37672159f1 = L.circleMarker(
+                [45.41972325, -71.910688475],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_b079fe14043360061ef978191dfb6f76 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b4bf3fc66fec2a011420211dc5a30b9 = $(`<div id="html_0b4bf3fc66fec2a011420211dc5a30b9" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 4</div>`)[0];
+                popup_b079fe14043360061ef978191dfb6f76.setContent(html_0b4bf3fc66fec2a011420211dc5a30b9);
+            
+        
+
+        circle_marker_7a251d73323ec708b9152b37672159f1.bindPopup(popup_b079fe14043360061ef978191dfb6f76)
+        ;
+
+        
+    
+    
+            var circle_marker_cff2488e4ec5059e950b0fa265b678a4 = L.circleMarker(
+                [44.2824879125, -76.54322528750001],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_9f4f731050ea36aafa525e1b0fed569b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3895c2762240ff09c8350a781dd7d54 = $(`<div id="html_e3895c2762240ff09c8350a781dd7d54" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 9</div>`)[0];
+                popup_9f4f731050ea36aafa525e1b0fed569b.setContent(html_e3895c2762240ff09c8350a781dd7d54);
+            
+        
+
+        circle_marker_cff2488e4ec5059e950b0fa265b678a4.bindPopup(popup_9f4f731050ea36aafa525e1b0fed569b)
+        ;
+
+        
+    
+    
+            var circle_marker_08b690513bd41fd9f23fe2b859061e6a = L.circleMarker(
+                [44.653747800000005, -63.56102002],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_a9f27d04a8cb872126202cfbae4ea936 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fe0ae5db6c2ff60e9a6f980110b7c7af = $(`<div id="html_fe0ae5db6c2ff60e9a6f980110b7c7af" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 5</div>`)[0];
+                popup_a9f27d04a8cb872126202cfbae4ea936.setContent(html_fe0ae5db6c2ff60e9a6f980110b7c7af);
+            
+        
+
+        circle_marker_08b690513bd41fd9f23fe2b859061e6a.bindPopup(popup_a9f27d04a8cb872126202cfbae4ea936)
+        ;
+
+        
+    
+    
+            var circle_marker_6845ad998ac5df74e9dfd006132a200d = L.circleMarker(
+                [45.07333885, -64.48216245],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_68fc537f4cebf4b2fe5068f91de0c241 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5c7ee89a72a8bb17ba6caee90dbab6ce = $(`<div id="html_5c7ee89a72a8bb17ba6caee90dbab6ce" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 2</div>`)[0];
+                popup_68fc537f4cebf4b2fe5068f91de0c241.setContent(html_5c7ee89a72a8bb17ba6caee90dbab6ce);
+            
+        
+
+        circle_marker_6845ad998ac5df74e9dfd006132a200d.bindPopup(popup_68fc537f4cebf4b2fe5068f91de0c241)
+        ;
+
+        
+    
+    
+            var circle_marker_496b5bc71fa82684239828d9e163ec5f = L.circleMarker(
+                [46.09417625, -64.73760505],
+                {"bubblingMouseEvents": true, "color": "#7a0177", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7a0177", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_631be14e758a6399094459ae5001ebb8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2b46e63aaa3d78af2d6cd7d603701c38 = $(`<div id="html_2b46e63aaa3d78af2d6cd7d603701c38" style="width: 100.0%; height: 100.0%;">Biotech Cluster<br>Firms: 2</div>`)[0];
+                popup_631be14e758a6399094459ae5001ebb8.setContent(html_2b46e63aaa3d78af2d6cd7d603701c38);
+            
+        
+
+        circle_marker_496b5bc71fa82684239828d9e163ec5f.bindPopup(popup_631be14e758a6399094459ae5001ebb8)
+        ;
+
+        
+    
+    
+            var circle_marker_624e09430d191c56a10e4776426f67f7 = L.circleMarker(
+                [49.22503396857144, -123.09153682285712],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 34.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_70306981f864320f8800ec5a2389dff9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_26db3151cc7a533e62ba81bbe94185dd = $(`<div id="html_26db3151cc7a533e62ba81bbe94185dd" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 113</div>`)[0];
+                popup_70306981f864320f8800ec5a2389dff9.setContent(html_26db3151cc7a533e62ba81bbe94185dd);
+            
+        
+
+        circle_marker_624e09430d191c56a10e4776426f67f7.bindPopup(popup_70306981f864320f8800ec5a2389dff9)
+        ;
+
+        
+    
+    
+            var circle_marker_fa3abc776dbcd0b3f09d1e5c495096ca = L.circleMarker(
+                [43.64847627259615, -79.62019968173081],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 61.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_7de086b79e3900b51a05b7b5c11183d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8454f0cdcb839c7ea407a2fd0e66397a = $(`<div id="html_8454f0cdcb839c7ea407a2fd0e66397a" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 220</div>`)[0];
+                popup_7de086b79e3900b51a05b7b5c11183d2.setContent(html_8454f0cdcb839c7ea407a2fd0e66397a);
+            
+        
+
+        circle_marker_fa3abc776dbcd0b3f09d1e5c495096ca.bindPopup(popup_7de086b79e3900b51a05b7b5c11183d2)
+        ;
+
+        
+    
+    
+            var circle_marker_44a1ccb74bcde9ed8a9dc9747f3c55f5 = L.circleMarker(
+                [45.50703356153845, -73.61089341923076],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 27.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_122ccc6bf2af08c4992b61268e2156d0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_877291d28a21221ea76a5f67d738da49 = $(`<div id="html_877291d28a21221ea76a5f67d738da49" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 85</div>`)[0];
+                popup_122ccc6bf2af08c4992b61268e2156d0.setContent(html_877291d28a21221ea76a5f67d738da49);
+            
+        
+
+        circle_marker_44a1ccb74bcde9ed8a9dc9747f3c55f5.bindPopup(popup_122ccc6bf2af08c4992b61268e2156d0)
+        ;
+
+        
+    
+    
+            var circle_marker_2cc809cb3ea30b9a6ef80414b2e66859 = L.circleMarker(
+                [46.44343041333334, -71.51373525999999],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_f4516d6f961a8a2e22291cc380ebd96a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_400110e9e4476c1ca2a990b61cafd76b = $(`<div id="html_400110e9e4476c1ca2a990b61cafd76b" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 15</div>`)[0];
+                popup_f4516d6f961a8a2e22291cc380ebd96a.setContent(html_400110e9e4476c1ca2a990b61cafd76b);
+            
+        
+
+        circle_marker_2cc809cb3ea30b9a6ef80414b2e66859.bindPopup(popup_f4516d6f961a8a2e22291cc380ebd96a)
+        ;
+
+        
+    
+    
+            var circle_marker_a7711f0fd1c17994071760dbc7602c9f = L.circleMarker(
+                [44.65913072, -63.59450260999999],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_75019367f01b05ffd811dfbcb08726e4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_43c01dae014ae1ebd07c3d695a9b0619 = $(`<div id="html_43c01dae014ae1ebd07c3d695a9b0619" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 10</div>`)[0];
+                popup_75019367f01b05ffd811dfbcb08726e4.setContent(html_43c01dae014ae1ebd07c3d695a9b0619);
+            
+        
+
+        circle_marker_a7711f0fd1c17994071760dbc7602c9f.bindPopup(popup_75019367f01b05ffd811dfbcb08726e4)
+        ;
+
+        
+    
+    
+            var circle_marker_2ed9ba020ffa685d63bbebd00d71650c = L.circleMarker(
+                [45.37142899864866, -75.76882414999999],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_aeb0d1f5206173946ff727e60d273a7b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5b810b0b89a40064e0ca64ed45b25b4 = $(`<div id="html_a5b810b0b89a40064e0ca64ed45b25b4" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 79</div>`)[0];
+                popup_aeb0d1f5206173946ff727e60d273a7b.setContent(html_a5b810b0b89a40064e0ca64ed45b25b4);
+            
+        
+
+        circle_marker_2ed9ba020ffa685d63bbebd00d71650c.bindPopup(popup_aeb0d1f5206173946ff727e60d273a7b)
+        ;
+
+        
+    
+    
+            var circle_marker_8ded0d35cfad3e174dc6bb549fc7a609 = L.circleMarker(
+                [49.910399274999996, -119.49946960000001],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_ad67280a835bb93d7ea9a4e13ba63d16 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5b9738d958152982986a4cc50cf359b8 = $(`<div id="html_5b9738d958152982986a4cc50cf359b8" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 4</div>`)[0];
+                popup_ad67280a835bb93d7ea9a4e13ba63d16.setContent(html_5b9738d958152982986a4cc50cf359b8);
+            
+        
+
+        circle_marker_8ded0d35cfad3e174dc6bb549fc7a609.bindPopup(popup_ad67280a835bb93d7ea9a4e13ba63d16)
+        ;
+
+        
+    
+    
+            var circle_marker_e7b55b132a34b4d37b7888b5477d7d26 = L.circleMarker(
+                [53.496166007692324, -113.42159508461538],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_b5ddc714fe3b2e976333e0a3c5701adf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d9d588bbe612170d0dbc0fe38ab4ea82 = $(`<div id="html_d9d588bbe612170d0dbc0fe38ab4ea82" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 13</div>`)[0];
+                popup_b5ddc714fe3b2e976333e0a3c5701adf.setContent(html_d9d588bbe612170d0dbc0fe38ab4ea82);
+            
+        
+
+        circle_marker_e7b55b132a34b4d37b7888b5477d7d26.bindPopup(popup_b5ddc714fe3b2e976333e0a3c5701adf)
+        ;
+
+        
+    
+    
+            var circle_marker_2802b17bb236bfab7ae240cb9abbe8e2 = L.circleMarker(
+                [45.94219484, -66.6671102],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_7041609fe39d50612d526ed840472651 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7aa394a09ddf7636cede7bd0a9dbabd6 = $(`<div id="html_7aa394a09ddf7636cede7bd0a9dbabd6" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 5</div>`)[0];
+                popup_7041609fe39d50612d526ed840472651.setContent(html_7aa394a09ddf7636cede7bd0a9dbabd6);
+            
+        
+
+        circle_marker_2802b17bb236bfab7ae240cb9abbe8e2.bindPopup(popup_7041609fe39d50612d526ed840472651)
+        ;
+
+        
+    
+    
+            var circle_marker_60f92b9c3b17a865bf45bebb60d09a08 = L.circleMarker(
+                [52.1489556, -106.63948233333333],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_afd1895c6e8e95620f160379037c8401 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dbe49ac2e12417dcae2dc53d72a5438e = $(`<div id="html_dbe49ac2e12417dcae2dc53d72a5438e" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 3</div>`)[0];
+                popup_afd1895c6e8e95620f160379037c8401.setContent(html_dbe49ac2e12417dcae2dc53d72a5438e);
+            
+        
+
+        circle_marker_60f92b9c3b17a865bf45bebb60d09a08.bindPopup(popup_afd1895c6e8e95620f160379037c8401)
+        ;
+
+        
+    
+    
+            var circle_marker_52457144672c087f86aa22c43ddca5dd = L.circleMarker(
+                [51.04029001666666, -114.06201597777778],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_61f4367d3ece378530a391e7e6e54393 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6a9afe97c336737c9b506d0e056aca75 = $(`<div id="html_6a9afe97c336737c9b506d0e056aca75" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 19</div>`)[0];
+                popup_61f4367d3ece378530a391e7e6e54393.setContent(html_6a9afe97c336737c9b506d0e056aca75);
+            
+        
+
+        circle_marker_52457144672c087f86aa22c43ddca5dd.bindPopup(popup_61f4367d3ece378530a391e7e6e54393)
+        ;
+
+        
+    
+    
+            var circle_marker_ec7ef74e92c57eb3ee4b147cf11afa2c = L.circleMarker(
+                [46.12913376666666, -60.205912866666665],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_96344ce9a9dce0449a09610fe6651334 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5ab5997c4074af737318157110fc3b8a = $(`<div id="html_5ab5997c4074af737318157110fc3b8a" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 4</div>`)[0];
+                popup_96344ce9a9dce0449a09610fe6651334.setContent(html_5ab5997c4074af737318157110fc3b8a);
+            
+        
+
+        circle_marker_ec7ef74e92c57eb3ee4b147cf11afa2c.bindPopup(popup_96344ce9a9dce0449a09610fe6651334)
+        ;
+
+        
+    
+    
+            var circle_marker_9f026cd666a845bdfa8f0843901da5c8 = L.circleMarker(
+                [42.2604501, -82.97184585],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_00ab1d6b821dd8e279b6f81c8b58cd4f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f20971064261f5a189a84e158ad62809 = $(`<div id="html_f20971064261f5a189a84e158ad62809" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 2</div>`)[0];
+                popup_00ab1d6b821dd8e279b6f81c8b58cd4f.setContent(html_f20971064261f5a189a84e158ad62809);
+            
+        
+
+        circle_marker_9f026cd666a845bdfa8f0843901da5c8.bindPopup(popup_00ab1d6b821dd8e279b6f81c8b58cd4f)
+        ;
+
+        
+    
+    
+            var circle_marker_0a0ef3518088697001480f9fe39d18bc = L.circleMarker(
+                [46.500794, -80.98379274999999],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_d62132195f65a8f617fca191273ad590 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_076b4eb8b8c9e0f84a617571c12b49f1 = $(`<div id="html_076b4eb8b8c9e0f84a617571c12b49f1" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 2</div>`)[0];
+                popup_d62132195f65a8f617fca191273ad590.setContent(html_076b4eb8b8c9e0f84a617571c12b49f1);
+            
+        
+
+        circle_marker_0a0ef3518088697001480f9fe39d18bc.bindPopup(popup_d62132195f65a8f617fca191273ad590)
+        ;
+
+        
+    
+    
+            var circle_marker_d47ce23e005217d45cbd16d6370aeabc = L.circleMarker(
+                [44.2515621, -76.4624089],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_0bbf64c79cf6411d8750b95bdd7a59dd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8bf92c1321565b27816922a26fba6724 = $(`<div id="html_8bf92c1321565b27816922a26fba6724" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 2</div>`)[0];
+                popup_0bbf64c79cf6411d8750b95bdd7a59dd.setContent(html_8bf92c1321565b27816922a26fba6724);
+            
+        
+
+        circle_marker_d47ce23e005217d45cbd16d6370aeabc.bindPopup(popup_0bbf64c79cf6411d8750b95bdd7a59dd)
+        ;
+
+        
+    
+    
+            var circle_marker_c3c71b97e6a79ee8ee52bc839e72e30d = L.circleMarker(
+                [45.27373745, -66.06042495],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_dfe92b97812c2ae5eac523ed40dfbe0e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_21b6b5af9e1283cf22186ee4f4bfcf99 = $(`<div id="html_21b6b5af9e1283cf22186ee4f4bfcf99" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 2</div>`)[0];
+                popup_dfe92b97812c2ae5eac523ed40dfbe0e.setContent(html_21b6b5af9e1283cf22186ee4f4bfcf99);
+            
+        
+
+        circle_marker_c3c71b97e6a79ee8ee52bc839e72e30d.bindPopup(popup_dfe92b97812c2ae5eac523ed40dfbe0e)
+        ;
+
+        
+    
+    
+            var circle_marker_43ad748778985110837b08ad60a724a6 = L.circleMarker(
+                [50.446660949999995, -104.59722955000001],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_0fc0f286e81805f946b664b7b4a75c01 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_861a7a9a86391521cf09a4abfff1d3c5 = $(`<div id="html_861a7a9a86391521cf09a4abfff1d3c5" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 2</div>`)[0];
+                popup_0fc0f286e81805f946b664b7b4a75c01.setContent(html_861a7a9a86391521cf09a4abfff1d3c5);
+            
+        
+
+        circle_marker_43ad748778985110837b08ad60a724a6.bindPopup(popup_0fc0f286e81805f946b664b7b4a75c01)
+        ;
+
+        
+    
+    
+            var circle_marker_6e197498e178ac54545603c73d0f0504 = L.circleMarker(
+                [49.8195082, -97.07679295000001],
+                {"bubblingMouseEvents": true, "color": "#00441b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00441b", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_daca15230c0234c14495bcdb14a74570 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e5a0e5579b1231793d9258020755cf35 = $(`<div id="html_e5a0e5579b1231793d9258020755cf35" style="width: 100.0%; height: 100.0%;">Software Cluster<br>Firms: 6</div>`)[0];
+                popup_daca15230c0234c14495bcdb14a74570.setContent(html_e5a0e5579b1231793d9258020755cf35);
+            
+        
+
+        circle_marker_6e197498e178ac54545603c73d0f0504.bindPopup(popup_daca15230c0234c14495bcdb14a74570)
+        ;
+
+        
+    
+    
+            var circle_marker_7fd623de8d5ee5acb1ed3a8c8fbbf218 = L.circleMarker(
+                [50.276338, -107.8163572],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_c2b4566fcf90e328bb8285148ef392de = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8180e0196698721809fb1dec8ddb8893 = $(`<div id="html_8180e0196698721809fb1dec8ddb8893" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 5</div>`)[0];
+                popup_c2b4566fcf90e328bb8285148ef392de.setContent(html_8180e0196698721809fb1dec8ddb8893);
+            
+        
+
+        circle_marker_7fd623de8d5ee5acb1ed3a8c8fbbf218.bindPopup(popup_c2b4566fcf90e328bb8285148ef392de)
+        ;
+
+        
+    
+    
+            var circle_marker_831a28837e70a69f3941cffa39d400dc = L.circleMarker(
+                [49.18341065, -122.84871741250001],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_c11b774271340c22de5602b50c1a781b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4e582ebabbc43defda928818ee6cd6da = $(`<div id="html_4e582ebabbc43defda928818ee6cd6da" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 17</div>`)[0];
+                popup_c11b774271340c22de5602b50c1a781b.setContent(html_4e582ebabbc43defda928818ee6cd6da);
+            
+        
+
+        circle_marker_831a28837e70a69f3941cffa39d400dc.bindPopup(popup_c11b774271340c22de5602b50c1a781b)
+        ;
+
+        
+    
+    
+            var circle_marker_c2cd289d17b6e0d53687385b416bde75 = L.circleMarker(
+                [43.47131491764705, -79.9953307147059],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_3956d2b1bfc4b984f480a16f7e579889 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fbf6d33f70a0438b20f6736897221d4b = $(`<div id="html_fbf6d33f70a0438b20f6736897221d4b" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 37</div>`)[0];
+                popup_3956d2b1bfc4b984f480a16f7e579889.setContent(html_fbf6d33f70a0438b20f6736897221d4b);
+            
+        
+
+        circle_marker_c2cd289d17b6e0d53687385b416bde75.bindPopup(popup_3956d2b1bfc4b984f480a16f7e579889)
+        ;
+
+        
+    
+    
+            var circle_marker_d9aa7371bf1b43b7e477344ab74a13be = L.circleMarker(
+                [49.69770035000001, -97.30298549166666],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_06aa93e3c3cd4fed2326237e72c4830b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b1006f1de65425f641eacbfa8ef91220 = $(`<div id="html_b1006f1de65425f641eacbfa8ef91220" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 14</div>`)[0];
+                popup_06aa93e3c3cd4fed2326237e72c4830b.setContent(html_b1006f1de65425f641eacbfa8ef91220);
+            
+        
+
+        circle_marker_d9aa7371bf1b43b7e477344ab74a13be.bindPopup(popup_06aa93e3c3cd4fed2326237e72c4830b)
+        ;
+
+        
+    
+    
+            var circle_marker_c6b826bb7996f256cf2281253fd207c4 = L.circleMarker(
+                [53.39474306666667, -113.66165513333334],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_8fc3667b0cbfa3b6bc4fc700b118ae33 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_057b1b3ccd3b9dc58c88d3d3056649dd = $(`<div id="html_057b1b3ccd3b9dc58c88d3d3056649dd" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 3</div>`)[0];
+                popup_8fc3667b0cbfa3b6bc4fc700b118ae33.setContent(html_057b1b3ccd3b9dc58c88d3d3056649dd);
+            
+        
+
+        circle_marker_c6b826bb7996f256cf2281253fd207c4.bindPopup(popup_8fc3667b0cbfa3b6bc4fc700b118ae33)
+        ;
+
+        
+    
+    
+            var circle_marker_983cba6f3a3bfb4169732b37b53e387d = L.circleMarker(
+                [51.043663825, -113.9982453],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_66b96b22c8b867725f32cf4058d0db3a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2a2b569e28545fbdb70ba91fe86b1d59 = $(`<div id="html_2a2b569e28545fbdb70ba91fe86b1d59" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 4</div>`)[0];
+                popup_66b96b22c8b867725f32cf4058d0db3a.setContent(html_2a2b569e28545fbdb70ba91fe86b1d59);
+            
+        
+
+        circle_marker_983cba6f3a3bfb4169732b37b53e387d.bindPopup(popup_66b96b22c8b867725f32cf4058d0db3a)
+        ;
+
+        
+    
+    
+            var circle_marker_55d99d58b7cc97414afc66dca6f371ed = L.circleMarker(
+                [45.99227371724138, -72.37574975517242],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_6170aad6217fa6ab03b32b7af8e4496d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_81d20673fbb465362c1173257f827869 = $(`<div id="html_81d20673fbb465362c1173257f827869" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 31</div>`)[0];
+                popup_6170aad6217fa6ab03b32b7af8e4496d.setContent(html_81d20673fbb465362c1173257f827869);
+            
+        
+
+        circle_marker_55d99d58b7cc97414afc66dca6f371ed.bindPopup(popup_6170aad6217fa6ab03b32b7af8e4496d)
+        ;
+
+        
+    
+    
+            var circle_marker_aa21bf2900ce94996a40b1c9dc0ca4c4 = L.circleMarker(
+                [49.8977267, -100.05326603333333],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_ebc6740671027110975bdad83eba2ff3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fd1e268e38b88a1770151554d14abb66 = $(`<div id="html_fd1e268e38b88a1770151554d14abb66" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 3</div>`)[0];
+                popup_ebc6740671027110975bdad83eba2ff3.setContent(html_fd1e268e38b88a1770151554d14abb66);
+            
+        
+
+        circle_marker_aa21bf2900ce94996a40b1c9dc0ca4c4.bindPopup(popup_ebc6740671027110975bdad83eba2ff3)
+        ;
+
+        
+    
+    
+            var circle_marker_6f135b517c16bf56d1fbf36a407fa25a = L.circleMarker(
+                [52.63690625000001, -104.88592184999999],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_e361303475e664c831cb3356c3d5aa4e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_abae109f4d4474bafee3d238b7119c7d = $(`<div id="html_abae109f4d4474bafee3d238b7119c7d" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 2</div>`)[0];
+                popup_e361303475e664c831cb3356c3d5aa4e.setContent(html_abae109f4d4474bafee3d238b7119c7d);
+            
+        
+
+        circle_marker_6f135b517c16bf56d1fbf36a407fa25a.bindPopup(popup_e361303475e664c831cb3356c3d5aa4e)
+        ;
+
+        
+    
+    
+            var circle_marker_500e2882871e874e445221b7245f5a29 = L.circleMarker(
+                [50.4895731375, -104.46735947500001],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.25, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_9a13f345058520026442d8f2d4bbc17c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5e0303da855f3f9f833eaea649a636c3 = $(`<div id="html_5e0303da855f3f9f833eaea649a636c3" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 9</div>`)[0];
+                popup_9a13f345058520026442d8f2d4bbc17c.setContent(html_5e0303da855f3f9f833eaea649a636c3);
+            
+        
+
+        circle_marker_500e2882871e874e445221b7245f5a29.bindPopup(popup_9a13f345058520026442d8f2d4bbc17c)
+        ;
+
+        
+    
+    
+            var circle_marker_b97402088b415b867465beaeebed6e3a = L.circleMarker(
+                [50.56838656666667, -111.90075093333333],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_7c3606c6b935daef41704aeb19160fae = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4746ae5ef57be766afd88bb0169844ae = $(`<div id="html_4746ae5ef57be766afd88bb0169844ae" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 3</div>`)[0];
+                popup_7c3606c6b935daef41704aeb19160fae.setContent(html_4746ae5ef57be766afd88bb0169844ae);
+            
+        
+
+        circle_marker_b97402088b415b867465beaeebed6e3a.bindPopup(popup_7c3606c6b935daef41704aeb19160fae)
+        ;
+
+        
+    
+    
+            var circle_marker_08477ae46e0f1ecd421ba79d631e8f74 = L.circleMarker(
+                [53.29989035, -111.9245412],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_d4a9a276f55af9c0c0d973a58310350f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_052befc280651ccfe95fa4ad98c51b8e = $(`<div id="html_052befc280651ccfe95fa4ad98c51b8e" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 3</div>`)[0];
+                popup_d4a9a276f55af9c0c0d973a58310350f.setContent(html_052befc280651ccfe95fa4ad98c51b8e);
+            
+        
+
+        circle_marker_08477ae46e0f1ecd421ba79d631e8f74.bindPopup(popup_d4a9a276f55af9c0c0d973a58310350f)
+        ;
+
+        
+    
+    
+            var circle_marker_3e21eac6304d1c716ff4c8be19a32aee = L.circleMarker(
+                [48.0140185, -69.24517392499999],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_73e63f2534d40b640482be66fb3ee630 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f5f3c695b7d2f85ea06b70f479ed10cc = $(`<div id="html_f5f3c695b7d2f85ea06b70f479ed10cc" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 4</div>`)[0];
+                popup_73e63f2534d40b640482be66fb3ee630.setContent(html_f5f3c695b7d2f85ea06b70f479ed10cc);
+            
+        
+
+        circle_marker_3e21eac6304d1c716ff4c8be19a32aee.bindPopup(popup_73e63f2534d40b640482be66fb3ee630)
+        ;
+
+        
+    
+    
+            var circle_marker_69d8ede323170c368ba595106a252cb5 = L.circleMarker(
+                [42.47237943333334, -81.96534603333333],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.75, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_df0273c131d7d71b6768dde4118c7cf3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b046eed0174610dcbdb95283d86089e2 = $(`<div id="html_b046eed0174610dcbdb95283d86089e2" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 3</div>`)[0];
+                popup_df0273c131d7d71b6768dde4118c7cf3.setContent(html_b046eed0174610dcbdb95283d86089e2);
+            
+        
+
+        circle_marker_69d8ede323170c368ba595106a252cb5.bindPopup(popup_df0273c131d7d71b6768dde4118c7cf3)
+        ;
+
+        
+    
+    
+            var circle_marker_cb118d046e7bfbabd3ddc41741259a90 = L.circleMarker(
+                [52.19684683333333, -106.54946028333335],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_2b7b971f77396184a94cf7dbe8bd5c7b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d2091b14919df48d46079fc3fcc85705 = $(`<div id="html_d2091b14919df48d46079fc3fcc85705" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 6</div>`)[0];
+                popup_2b7b971f77396184a94cf7dbe8bd5c7b.setContent(html_d2091b14919df48d46079fc3fcc85705);
+            
+        
+
+        circle_marker_cb118d046e7bfbabd3ddc41741259a90.bindPopup(popup_2b7b971f77396184a94cf7dbe8bd5c7b)
+        ;
+
+        
+    
+    
+            var circle_marker_49c6edb9de0a71cafe543e7a1ee9679f = L.circleMarker(
+                [45.33397240000001, -75.65192225000001],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_d023a5dfa67299a9d8593ea505edfe1e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_441fd272831ab35db601100911cc422c = $(`<div id="html_441fd272831ab35db601100911cc422c" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 2</div>`)[0];
+                popup_d023a5dfa67299a9d8593ea505edfe1e.setContent(html_441fd272831ab35db601100911cc422c);
+            
+        
+
+        circle_marker_49c6edb9de0a71cafe543e7a1ee9679f.bindPopup(popup_d023a5dfa67299a9d8593ea505edfe1e)
+        ;
+
+        
+    
+    
+            var circle_marker_df4711f7c94e886a9d863ef1cf18cbd3 = L.circleMarker(
+                [50.35490075, -102.30183545],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_c6e7627b7df125afda2d1dd136e872d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_59daecb42bec57c2b59e9bd574a61321 = $(`<div id="html_59daecb42bec57c2b59e9bd574a61321" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 2</div>`)[0];
+                popup_c6e7627b7df125afda2d1dd136e872d5.setContent(html_59daecb42bec57c2b59e9bd574a61321);
+            
+        
+
+        circle_marker_df4711f7c94e886a9d863ef1cf18cbd3.bindPopup(popup_c6e7627b7df125afda2d1dd136e872d5)
+        ;
+
+        
+    
+    
+            var circle_marker_97eb94520f16d33cd58a650e5cd1d045 = L.circleMarker(
+                [44.64177975, -63.64224845],
+                {"bubblingMouseEvents": true, "color": "#8c510a", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c510a", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.5, "stroke": true, "weight": 3}
+            ).addTo(map_8792608b84ce9c856be0152bd47fdfce);
+        
+    
+        var popup_2d6a4f5d890687cb0ea3f8c650796933 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cf4df766b702cf19f711e0c30d7431ae = $(`<div id="html_cf4df766b702cf19f711e0c30d7431ae" style="width: 100.0%; height: 100.0%;">Agriculture Cluster<br>Firms: 2</div>`)[0];
+                popup_2d6a4f5d890687cb0ea3f8c650796933.setContent(html_cf4df766b702cf19f711e0c30d7431ae);
+            
+        
+
+        circle_marker_97eb94520f16d33cd58a650e5cd1d045.bindPopup(popup_2d6a4f5d890687cb0ea3f8c650796933)
+        ;
+
+        
+    
+</script>
+</html>
